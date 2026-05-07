@@ -7,7 +7,7 @@ const cards = [
     icon: "architecture",
     title: "The Philosophy",
     description:
-      "We believe in the intellectual pursuit of beauty. LUMIÈRE transforms environments into sensory narratives, where every material choice and structural line serves a purpose of serenity.",
+      "We believe in the intellectual pursuit of beauty. AROVA transforms environments into sensory narratives, where every material choice and structural line serves a purpose of serenity.",
     link: "LEARN MORE",
     span: 2,
   },

@@ -25,7 +25,7 @@ export default function ExperienceHero() {
           transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-[40px] md:text-display-xl text-on-surface mb-stack-sm leading-tight"
         >
-          The LUMIÈRE <br />
+          The AROVA <br />
           <span className="italic font-extralight">Experience</span>
         </motion.h1>
 

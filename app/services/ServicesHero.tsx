@@ -34,7 +34,7 @@ export default function ServicesHero() {
           </h1>
           <p className="text-body-lg text-on-surface-variant max-w-lg">
             Bespoke interior solutions that harmonize architecture with the human
-            experience. Every space tells a story of intention.
+            experience at AROVA. Every space tells a story of intention.
           </p>
         </motion.div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import gsap from "gsap";
 
 export default function HeroSection() {
@@ -35,21 +36,22 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background Video */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-surface-dim">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover scale-105"
+          preload="metadata"
+          className="w-full h-full object-cover scale-100"
           poster="https://lh3.googleusercontent.com/aida-public/AB6AXuCFHRtejjfvL122QSTRisuJhpRINO-4f8VNgtbI-4WzXFLAlqbq7x5LmCwFGnQK8ixp-W2NX2YzjVg0Te1FFoKk9bjjEn-T_FOsCLp6iejjY-iBEZXnGpbV-5FNVnt7L5EMxmRk0UuGXL2nP2rDQ3Y5fcm4oNb2LgB-NKPCZicx2OmXkyj7dsqskJVOsdj2zUmcxm5FqWrKKNa9liR49Uen_1tSF_WztXhH9QxPBIzxd1d2cun6QZjxeNmR5Sxrf3bQw61LDzAhkAU"
         >
           <source src="/Room_transformation_luxury_interior_202605072129.mp4" type="video/mp4" />
         </video>
-        {/* Cinematic Overlays */}
-        <div className="absolute inset-0 bg-black/40 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 z-10" />
-        <div className="absolute inset-0 grain-overlay opacity-30 z-20 pointer-events-none" />
+        {/* Cinematic Overlays - Enhanced for better contrast */}
+        <div className="absolute inset-0 bg-black/50 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 z-10" />
+        <div className="absolute inset-0 grain-overlay opacity-20 z-20 pointer-events-none" />
       </div>
 
       {/* Content */}
@@ -62,8 +64,8 @@ export default function HeroSection() {
         </p>
 
         <h1 className="font-display text-[54px] sm:text-[72px] md:text-[100px] lg:text-[130px] leading-[0.85] mb-10 tracking-tighter">
-          LUMIÈRE <br />
-          <span className="italic font-extralight opacity-90">ARCHITECTS</span>
+          AROVA <br />
+          <span className="italic font-extralight opacity-90">INTERIORS</span>
         </h1>
 
         <p className="text-body-lg text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
@@ -71,14 +73,25 @@ export default function HeroSection() {
           high-end architectural visualization and curated interior design.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <button className="group px-12 py-5 bg-white text-black text-label-sm font-label tracking-[0.2em] hover:bg-primary hover:text-on-primary smooth-ease active:scale-95">
-            VIEW PORTFOLIO
-          </button>
-          <button className="px-12 py-5 border border-white/30 text-white text-label-sm font-label tracking-[0.2em] hover:bg-white/10 smooth-ease">
-            THE ATELIER
-          </button>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+        >
+          <Link
+            href="/architects"
+            className="w-full sm:w-auto px-10 py-5 bg-white text-black font-label tracking-[0.3em] hover:bg-primary hover:text-white transition-all duration-500 text-[12px] uppercase text-center"
+          >
+            ARCHITECTS
+          </Link>
+          <Link
+            href="/services"
+            className="w-full sm:w-auto px-10 py-5 border border-white/30 text-white font-label tracking-[0.3em] hover:bg-white hover:text-black transition-all duration-500 text-[12px] uppercase text-center backdrop-blur-sm"
+          >
+            OUR WORK
+          </Link>
+        </motion.div>
       </div>
 
       {/* Stats / Detail Footer */}

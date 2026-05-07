@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import gsap from "gsap";
 
 const navLinks = [
-  { href: "/", label: "Atelier" },
+  { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
+  { href: "/architects", label: "Architects" },
   { href: "/experience", label: "Experience" },
 ];
 
@@ -16,24 +16,13 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current,
-        { y: -100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.2 }
-      );
-    }
   }, []);
 
   useEffect(() => {
@@ -43,36 +32,31 @@ export default function Header() {
   return (
     <>
       <header
-        ref={headerRef}
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-background/90 backdrop-blur-xl shadow-[0_1px_0_rgba(207,197,185,0.3)] py-3"
-            : "bg-transparent py-5"
+            ? "bg-background/95 backdrop-blur-xl shadow-sm py-3"
+            : "bg-background/40 backdrop-blur-md py-5"
         }`}
       >
         <nav className="flex justify-between items-center px-6 md:px-margin-page max-w-[1440px] mx-auto">
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden flex items-center justify-center w-10 h-10 hover:opacity-70 smooth-ease ${
-              isScrolled ? "text-primary" : "text-white"
-            }`}
+            className="md:hidden flex items-center justify-center w-10 h-10 text-on-surface hover:opacity-70 smooth-ease"
             aria-label="Toggle menu"
           >
             <span className="material-symbols-outlined">
               {isMobileMenuOpen ? "close" : "menu"}
             </span>
           </button>
- 
+
           {/* Logo */}
           <Link href="/" className="group">
-            <h1 className={`font-display text-headline-md tracking-[0.2em] uppercase smooth-ease group-hover:tracking-[0.3em] ${
-              isScrolled ? "text-primary" : "text-white"
-            }`}>
-              LUMIÈRE
+            <h1 className="font-display text-headline-md tracking-[0.2em] text-primary uppercase smooth-ease group-hover:tracking-[0.3em]">
+              AROVA
             </h1>
           </Link>
- 
+
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-gutter">
             {navLinks.map((link) => (
@@ -81,39 +65,32 @@ export default function Header() {
                 href={link.href}
                 className={`relative text-label-sm font-label tracking-[0.1em] smooth-ease ${
                   pathname === link.href
-                    ? isScrolled ? "text-primary font-bold" : "text-white font-bold"
-                    : isScrolled ? "text-on-surface-variant hover:text-primary" : "text-white/80 hover:text-white"
+                    ? "text-primary font-bold"
+                    : "text-on-surface-variant hover:text-primary"
                 }`}
               >
                 {link.label}
                 {pathname === link.href && (
                   <motion.div
-                    layoutId="nav-underline"
-                    className={`absolute -bottom-2 left-0 right-0 h-[2px] ${
-                      isScrolled ? "bg-primary" : "bg-white"
-                    }`}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-primary"
                   />
                 )}
               </Link>
             ))}
           </div>
- 
+
           {/* CTA */}
           <Link
             href="/experience#contact"
-            className={`hidden sm:block text-label-sm font-label tracking-[0.15em] px-6 py-3 smooth-ease active:scale-95 border ${
-              isScrolled 
-                ? "text-primary border-primary/20 hover:bg-primary hover:text-on-primary" 
-                : "text-white border-white/30 hover:bg-white hover:text-black"
-            }`}
+            className="hidden sm:block text-label-sm font-label tracking-[0.1em] text-primary border border-primary/20 px-6 py-2.5 hover:bg-primary hover:text-on-primary smooth-ease active:scale-95"
           >
             CONSULTATION
           </Link>
         </nav>
       </header>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div

@@ -13,7 +13,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "LUMIÈRE | Timeless Interior Experiences",
+  title: "AROVA | Timeless Interior Experiences",
   description:
     "Crafting timeless interior experiences through architectural precision, quiet luxury, and the interplay of light, texture, and space.",
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "quiet luxury",
   ],
   openGraph: {
-    title: "LUMIÈRE | Timeless Interior Experiences",
+    title: "AROVA | Timeless Interior Experiences",
     description:
       "Crafting timeless interior experiences through architectural precision and quiet luxury.",
     type: "website",

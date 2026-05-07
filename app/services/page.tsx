@@ -5,7 +5,7 @@ import ServicesHero from "./ServicesHero";
 import CTASection from "@/components/CTASection";
 
 export const metadata: Metadata = {
-  title: "LUMIÈRE | Services & Process",
+  title: "AROVA | Services & Process",
   description:
     "Bespoke interior solutions — from architectural curation and luminance design to custom furniture and modular kitchens. Discover our methodology.",
 };
