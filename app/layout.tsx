@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import { usePathname } from "next/navigation";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -12,30 +14,14 @@ const manrope = Manrope({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "AROVA | Timeless Interior Experiences",
-  description:
-    "Crafting timeless interior experiences through architectural precision, quiet luxury, and the interplay of light, texture, and space.",
-  keywords: [
-    "interior design",
-    "luxury interiors",
-    "architectural design",
-    "minimalist",
-    "quiet luxury",
-  ],
-  openGraph: {
-    title: "AROVA | Timeless Interior Experiences",
-    description:
-      "Crafting timeless interior experiences through architectural precision and quiet luxury.",
-    type: "website",
-  },
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const isStudio = pathname?.startsWith("/studio");
+
   return (
     <html lang="en" className={`${manrope.variable}`}>
       <head>
@@ -44,12 +30,16 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-body min-h-screen flex flex-col">
-        <SmoothScrollProvider>
-          <Header />
+      <body className="font-body min-h-screen flex flex-col" suppressHydrationWarning>
+        {!isStudio ? (
+          <SmoothScrollProvider>
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </SmoothScrollProvider>
+        ) : (
           <main className="flex-grow">{children}</main>
-          <Footer />
-        </SmoothScrollProvider>
+        )}
       </body>
     </html>
   );

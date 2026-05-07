@@ -1,20 +1,24 @@
-import type { Metadata } from "next";
 import ServicesGrid from "@/components/ServicesGrid";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import ServicesHero from "./ServicesHero";
 import CTASection from "@/components/CTASection";
+import ServicesPortfolio from "@/app/services/ServicesPortfolio";
+import { client } from "@/sanity/lib/client";
+import { projectsQuery } from "@/sanity/lib/queries";
 
-export const metadata: Metadata = {
-  title: "AROVA | Services & Process",
-  description:
-    "Bespoke interior solutions — from architectural curation and luminance design to custom furniture and modular kitchens. Discover our methodology.",
+export const metadata = {
+  title: "AROVA | Services & Portfolio",
+  description: "Bespoke interior solutions and our portfolio of works. Discover our methodology.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const projects = await client.fetch(projectsQuery);
+
   return (
     <>
       <ServicesHero />
       <ServicesGrid />
+      <ServicesPortfolio initialProjects={projects} />
       <ServicesImageBreak />
       <ProcessTimeline />
       <CTASection />
